@@ -8,20 +8,20 @@ Select *
 from portfolio_project ..[owid-covid-data]
 order by 3,4
 
---select the data we are going to use
+--selecting the data I'm going to use
 select location,date,total_cases,new_cases,total_deaths,population
 from portfolio_project ..[owid-covid-data deaths]
 order by 1,2
 
 --looking at total_cases vs total_deaths
---show the likelihood of dying with covid
+--showing the likelihood of dying with covid
 select location,date,total_cases,total_deaths, (total_deaths/total_cases)*100 as death_percentage
 from portfolio_project..[owid-covid-data deaths]
 where location like '%states%'
 order by 1,2
 
 --looking at total cases vs population
---show the percentage of population got covid
+--showing the percentage of population got covid
 select location,date,total_cases,population, (total_cases/population)*100 as casesinfected_percentage
 from portfolio_project..[owid-covid-data deaths]
 where location like '%egypt%' 
@@ -33,7 +33,7 @@ from portfolio_project ..[owid-covid-data deaths]
 group by location,population
 order by casesinfected_percentage desc
 
---Lets break thingd down by location
+--breaking things down by location
 select location, MAX(cast(total_deaths as int)) as totaldeath_count
 from portfolio_project ..[owid-covid-data deaths]
 --where location like '%states%'
@@ -41,7 +41,7 @@ where continent is null
 group by location
 order by totaldeath_count desc
 
---Lets break thingd down by continent
+--breaking things down by continent
 
 --showing contintents with the hieghst death count per population
 select continent, MAX(cast(total_deaths as int)) as totaldeath_count
